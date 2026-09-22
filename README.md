@@ -91,10 +91,14 @@ text
 ```bash
 git clone https://github.com/ling022/node-accountlist.git
 cd node-accountlist
-###2. 安装依赖
+```
+### 2. 安装依赖
+
 bash
 npm install
-###3. 配置数据库
+
+### 3. 配置数据库
+
 编辑 config/config.js，修改成你自己的 MongoDB 连接信息：
 
 js
@@ -104,10 +108,11 @@ module.exports = {
   dbname: 'bilibili',
   secret: 'lingling'
 }
-###4. 启动 MongoDB
+
+### 4. 启动 MongoDB
 确保本地 MongoDB 服务已启动。
 
-###5. 启动项目
+### 5. 启动项目
 bash
 npm start
 默认监听 http://localhost:3000
@@ -174,6 +179,7 @@ json
   "account": 4500,
   "remarks": ""
 }
+
 5. 更新账单
 PATCH /api/account/id
 
@@ -208,6 +214,7 @@ js
   username: String,
   password: String
 }
+```
 ###安全说明
 密码使用 MD5 加密后存储，生产环境建议使用 bcrypt。
 
@@ -228,7 +235,5 @@ API 接口需要携带合法 JWT 才能访问。
 □ 使用环境变量管理配置
 License
 MIT
-
-text
-
 ---
+

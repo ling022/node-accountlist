@@ -38,6 +38,7 @@
 ---
 
 ## 目录结构
+```
 test/
 ├── bin/
 │ └── www
@@ -70,7 +71,7 @@ test/
 ├── app.js
 ├── package.json
 └── README.md
-
+```
 text
 
 ---
@@ -90,10 +91,10 @@ text
 ```bash
 git clone https://github.com/ling022/node-accountlist.git
 cd node-accountlist
-2. 安装依赖
+###2. 安装依赖
 bash
 npm install
-3. 配置数据库
+###3. 配置数据库
 编辑 config/config.js，修改成你自己的 MongoDB 连接信息：
 
 js
@@ -103,10 +104,10 @@ module.exports = {
   dbname: 'bilibili',
   secret: 'lingling'
 }
-4. 启动 MongoDB
+###4. 启动 MongoDB
 确保本地 MongoDB 服务已启动。
 
-5. 启动项目
+###5. 启动项目
 bash
 npm start
 默认监听 http://localhost:3000
@@ -207,7 +208,7 @@ js
   username: String,
   password: String
 }
-安全说明
+###安全说明
 密码使用 MD5 加密后存储，生产环境建议使用 bcrypt。
 
 config/config.js 中的 secret 是 JWT 签名密钥，请勿泄露到公开仓库。
@@ -218,7 +219,7 @@ Session Cookie 已开启 httpOnly，前端无法通过 JS 读取。
 
 API 接口需要携带合法 JWT 才能访问。
 
-待优化项
+##待优化项
 □ 账单列表支持分页
 □ 支持按类型、时间范围筛选
 □ 密码加密升级为 bcrypt

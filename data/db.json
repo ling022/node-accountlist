@@ -1,0 +1,22 @@
+{
+  "accounts": [
+    {
+      "id": "4gRGePB_6",
+      "title": "工资",
+      "time": "2026-09-17",
+      "type": "1",
+      "account": "4500",
+      "remarks": ""
+    }
+  ],
+  "create": [
+    {
+      "id": "1",
+      "title": "数字"
+    },
+    {
+      "id": "2",
+      "title": "字母"
+    }
+  ]
+}

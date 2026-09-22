@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>记账本</title>
+<style>
+  /* 1. 全局样式与页面居中 */
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f5f5f5; /* 浅灰背景，让卡片更突出 */
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* 2. 主体容器 */
+  .container {
+    width: 100%;
+    max-width: 600px; /* 限制最大宽度，模拟手机/卡片效果 */
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 柔和阴影 */
+    border-radius: 4px;
+  }
+
+  /* 3. 标题 */
+  h1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 16px 0;
+  }
+
+  /* 4. 列表容器 */
+  .record-list {
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    overflow: hidden; /* 让内部 header 的圆角不溢出 */
+  }
+
+  /* 5. 日期头部 (支出/收入公用) */
+  .date-header {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #666;
+  }
+  .date-header.expense {
+    background-color: #f2dede; /* 粉红色背景 */
+  }
+  .date-header.income {
+    background-color: #dff0d8; /* 浅绿色背景 */
+  }
+
+  /* 6. 记账条目行 */
+  .record-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #fff;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  /* 7. 左侧描述文本 */
+  .desc {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    padding-right: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 防止长文本撑破布局 */
+  }
+
+  /* 8. 中间标签 (支出/收入) */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 2px;
+    margin-right: 16px;
+    min-width: 36px;
+    text-align: center;
+  }
+  .tag.expense {
+    background-color: #f0ad4e; /* 橙色 */
+  }
+  .tag.income {
+    background-color: #5cb85c; /* 绿色 */
+  }
+
+  /* 9. 金额 */
+  .amount {
+    width: 80px;
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+    margin-right: 20px;
+  }
+
+  /* 10. 删除按钮 */
+  .delete-btn {
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    padding: 4px;
+    line-height: 1;
+    user-select: none;
+  }
+  .delete-btn:hover {
+    color: #d9534f; /* 悬停变红 */
+  }
+
+  /* 第二个条目的上边框 */
+  .record-list > div:nth-child(3) {
+    border-top: 1px solid #eaeaea;
+  }
+/* 11. 顶部标题栏：标题在左，按钮在右，同一行 */
+.header {
+  display: flex;
+  justify-content: space-between;  /* 两端对齐 */
+  align-items: center;             /* 垂直居中对齐 */
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  margin: 0;                       /* 去掉 h1 默认外边距 */
+}
+
+/* 12. 添加账单按钮：蓝色背景 */
+.add-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #337ab7;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.add-btn:hover {
+  background-color: #286090;
+  color: #fff;
+}
+/* 右侧按钮区域 */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 两个按钮之间留点间距 */
+}
+
+/* 退出登录按钮：红色 */
+.logout-btn {
+  background-color: #d9534f;
+}
+
+.logout-btn:hover {
+  background-color: #c9302c;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>记账本</h1>
+    
+    <div class="header-actions">
+      <a href="/account/create" class="add-btn">添加账单</a>
+      <form action="/logout" method="post">
+        <button class="add-btn logout-btn">退出登录</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="record-list">
+    <% accounts.forEach(item=>{%>
+    <div class="date-header <% if(item.type===-1){%>expense<% }else{%>income<%}%>"><%= moment(item.time).format('YYYY-MM-DD')%></div>
+    <div class="record-item">
+      <span class="desc"><%= item.title%></span>
+      <span class="tag <% if(item.type===-1){%>expense<% }else{%>income<%}%>"><% if(item.type===-1){%>支出<% }else{%>收入<%}%></span>
+      <span class="amount"><%= item.account%></span>
+      <a class="delBtn" href="/account/<%= item._id %>"><span class="delete-btn" title="删除">✕</span></a>
+    </div>
+    <%})%>
+    <!-- 第一条：支出 
+    <div class="date-header expense">2023-04-05</div>
+    <div class="record-item">
+      <span class="desc">抽烟只抽煊赫门，一生只爱一个人</span>
+      <span class="tag expense">支出</span>
+      <span class="amount">25 元</span>
+      <span class="delete-btn" title="删除">✕</span>
+    </div>
+     第二条：收入 
+    <div class="date-header income">2023-04-15</div>
+    <div class="record-item">
+      <span class="desc">3 月份发工资</span>
+      <span class="tag income">收入</span>
+      <span class="amount">4396 元</span>
+      -->
+    <!-- 收入条目没有删除按钮，如果需要可以加上 <span class="delete-btn">✕</span> -->
+    </div>
+  </div>
+</div>
+<script>
+  let delBtns=document.querySelectorAll(".delBtn")
+  delBtns.forEach(item=>{
+    item.addEventListener('click',function(e){
+      if(confirm('您确定删除吗？')){
+        return true
+      }else{
+        e.preventDefault()
+      }
+    })
+  })
+</script>
+</body>
+</html>

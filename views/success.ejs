@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>添加成功</title>
+<style>
+  /* 页面整体居中 */
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  /* 提示框容器 */
+  .alert-success {
+    width: 100%;
+    max-width: 600px;        /* 控制最大宽度 */
+    padding: 15px;
+    background-color: #dff0d8;   /* 浅绿色背景 */
+    border: 1px solid #d6e9c6;   /* 稍深的绿色边框 */
+    border-radius: 4px;
+    color: #3c763d;              /* 深绿色文字 */
+    box-sizing: border-box;
+  }
+
+  /* 第一行：主提示语 */
+  .alert-success .title {
+    font-size: 18px;
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+  }
+
+  /* 第二行：跳转链接 */
+  .alert-success .link {
+    font-size: 13px;
+    color: #3c763d;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .alert-success .link:hover {
+    color: #2b542c;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+  <div class="alert-success">
+    <p class="title">:) <%= msg%></p>
+    <a href="<%= url%>" class="link">点击跳转</a>
+  </div>
+
+</body>
+</html>

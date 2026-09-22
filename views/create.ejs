@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>添加记录</title>
+    <!-- 引用 Bootstrap 和 Datepicker 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css">
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="form-container">
+    <h2>添加记录</h2>
+    
+    <form method="post" action="/account" id="recordForm">
+        <!-- 事项 -->
+        <div class="form-group">
+            <label for="item">事项</label>
+            <input name="title" type="text" id="item" class="form-control" placeholder="">
+        </div>
+
+        <!-- 发生时间 (这里使用 datepicker) -->
+        <div class="form-group">
+            <label for="date">发生时间</label>
+            <input name="time" type="text" id="date" class="form-control" placeholder="选择日期" readonly>
+        </div>
+
+        <!-- 类型 -->
+        <div class="form-group">
+            <label for="type">类型</label>
+            <select name="type" id="type" class="form-control">
+                <option value="-1">支出</option>
+                <option value="1">收入</option>
+            </select>
+        </div>
+
+        <!-- 金额 -->
+        <div class="form-group">
+            <label for="amount">金额</label>
+            <input name="account" type="number" id="amount" class="form-control" placeholder="">
+        </div>
+
+        <!-- 备注 -->
+        <div class="form-group">
+            <label for="note">备注</label>
+            <textarea name="remarks" id="note" class="form-control" rows="3"></textarea>
+        </div>
+
+        <!-- 提交按钮 -->
+        <button type="submit" class="btn-submit">添加</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<!-- 引用脚本 (对应第一张图) -->
+<script src="/js/main.js"></script>
+
+</body>
+</html>
